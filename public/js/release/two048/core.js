@@ -14,7 +14,7 @@ return null;
 }),cljs.core.flatten(board)));
 });
 two048.core.get_new_board = (function two048$core$get_new_board(board){
-return cljs.core.into.cljs$core$IFn$_invoke$arity$2(cljs.core.PersistentVector.EMPTY,cljs.core.partition.cljs$core$IFn$_invoke$arity$2((4),cljs.core.assoc.cljs$core$IFn$_invoke$arity$3(cljs.core.into.cljs$core$IFn$_invoke$arity$2(cljs.core.PersistentVector.EMPTY,cljs.core.flatten(board)),two048.core.find_index_to_replace(board),(2))));
+return cljs.core.into.cljs$core$IFn$_invoke$arity$2(cljs.core.PersistentVector.EMPTY,cljs.core.partition.cljs$core$IFn$_invoke$arity$2((4),cljs.core.assoc.cljs$core$IFn$_invoke$arity$3(cljs.core.into.cljs$core$IFn$_invoke$arity$2(cljs.core.PersistentVector.EMPTY,cljs.core.flatten(board)),two048.core.find_index_to_replace(board),cljs.core.rand_nth(new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [(2),(4)], null)))));
 });
 two048.core.initial_board = (function two048$core$initial_board(){
 return two048.core.get_new_board(two048.core.get_new_board(two048.core.empty_board));
@@ -31,7 +31,7 @@ return cljs.core.partition_all.cljs$core$IFn$_invoke$arity$2((2),p1__23141_SHARP
 }),cljs.core.prim_seq.cljs$core$IFn$_invoke$arity$2([cljs.core.partition_by.cljs$core$IFn$_invoke$arity$2(cljs.core.identity,nums)], 0))));
 });
 two048.core.process_left = (function two048$core$process_left(row){
-return cljs.core.take.cljs$core$IFn$_invoke$arity$2((4),cljs.core.concat.cljs$core$IFn$_invoke$arity$2(cljs.core.filter.cljs$core$IFn$_invoke$arity$2(cljs.core.complement(cljs.core.zero_QMARK_),two048.core.add_valid_adjacents(row)),cljs.core.repeat.cljs$core$IFn$_invoke$arity$1((0))));
+return cljs.core.take.cljs$core$IFn$_invoke$arity$2((4),cljs.core.concat.cljs$core$IFn$_invoke$arity$2(two048.core.add_valid_adjacents(cljs.core.remove.cljs$core$IFn$_invoke$arity$2(cljs.core.zero_QMARK_,row)),cljs.core.repeat.cljs$core$IFn$_invoke$arity$1((0))));
 });
 two048.core.move_left = (function two048$core$move_left(board){
 return cljs.core.map.cljs$core$IFn$_invoke$arity$2(two048.core.process_left,board);

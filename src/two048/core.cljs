@@ -12,7 +12,7 @@
              #(if (zero? %2) %1) (flatten board))))
 
 (defn get-new-board [board]
-  (into [] (partition 4 (assoc (into [] (flatten board)) (find-index-to-replace board) 2))))
+  (into [] (partition 4 (assoc (into [] (flatten board)) (find-index-to-replace board) (rand-nth [2 4])))))
 
 (defn initial-board []
   (get-new-board (get-new-board empty-board)))
@@ -26,7 +26,7 @@
 
 (defn process-left [row]
   (take 4 (concat
-           (filter (complement zero?) (add-valid-adjacents row))
+           (add-valid-adjacents (remove zero? row))
            (repeat 0))))
 
 (defn move-left [board]
