@@ -36,3 +36,4 @@ var Java;
 Java.type;
 HTMLDocument.prototype.activeElement;
 HTMLDocument.prototype.getElementById;
+var confirm;

@@ -45,12 +45,20 @@
   (apply map vector
          (map process-left (apply map vector board))))
 
-(defn move [f board]
-  (do (swap! board f)
-      (swap! board get-new-board)))
+(defn is-winner? [board]
+  ((complement nil?) (some #{2048} (flatten @board))))
 
 (defn reset []
   (swap! board initial-board))
+
+(defn move [f board]
+  (if (is-winner? board)
+    (do
+      (js/confirm "🌟You Won The Game!✨")
+      (reset)))
+  (do
+    (swap! board f)
+    (swap! board get-new-board)))
 
 (def colors {2 "#fefefa"
              4 "#ffffe0"
@@ -71,25 +79,26 @@
 
 (defn home-page []
   [:div  {:class       "page"
-          :autoFocus   1
-          :tabIndex    1
+          :autoFocus true
+          :tabIndex 1
           :on-key-down #(case (.-which %)
                           37 (move move-left board)
                           38 (move move-up board)
                           39 (move move-right board)
                           40 (move move-down board) nil)}
+
    [:div {:class "header-and-reset"}
     [:h2  "two-048"]
-    [:input {:type :button :class "reset" :value "↻" :onClick (partial reset)}]]
+    [:input {:type :button :class "reset" :value "⟳" :onClick (partial reset)}]]
    [:div {:class "board"} (map render-row @board)]
 
    [:div {:class "controls"}
     [:div {:class "up"}
-     [:input {:type :button :value "⬆" :onClick (partial move move-up board)}]]
+     [:input {:type :button :value "⇧" :onClick (partial move move-up board)}]]
     [:div {:class "down-controls"}
-     [:input {:type :button :value "⬅" :onClick (partial move move-left board)}]
-     [:input {:type :button :value "⬇" :onClick (partial move move-down board)}]
-     [:input {:type :button :value "➡" :onClick (partial move move-right board)}]]]])
+     [:input {:type :button :value "⇦" :onClick (partial move move-left board)}]
+     [:input {:type :button :value "⇩" :onClick (partial move move-down board)}]
+     [:input {:type :button :value "⇨" :onClick (partial move move-right board)}]]]])
 
 (defn mount-root []
   (r/render [home-page] (.getElementById js/document "app")))

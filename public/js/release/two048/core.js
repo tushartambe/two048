@@ -48,13 +48,25 @@ return cljs.core.apply.cljs$core$IFn$_invoke$arity$3(cljs.core.map,cljs.core.vec
 two048.core.move_up = (function two048$core$move_up(board){
 return cljs.core.apply.cljs$core$IFn$_invoke$arity$3(cljs.core.map,cljs.core.vector,cljs.core.map.cljs$core$IFn$_invoke$arity$2(two048.core.process_left,cljs.core.apply.cljs$core$IFn$_invoke$arity$3(cljs.core.map,cljs.core.vector,board)));
 });
-two048.core.move = (function two048$core$move(f,board){
-cljs.core.swap_BANG_.cljs$core$IFn$_invoke$arity$2(board,f);
-
-return cljs.core.swap_BANG_.cljs$core$IFn$_invoke$arity$2(board,two048.core.get_new_board);
+two048.core.is_winner_QMARK_ = (function two048$core$is_winner_QMARK_(board){
+var G__23143 = cljs.core.some(new cljs.core.PersistentHashSet(null, new cljs.core.PersistentArrayMap(null, 1, [(2048),null], null), null),cljs.core.flatten(cljs.core.deref(board)));
+var fexpr__23142 = cljs.core.complement(cljs.core.nil_QMARK_);
+return (fexpr__23142.cljs$core$IFn$_invoke$arity$1 ? fexpr__23142.cljs$core$IFn$_invoke$arity$1(G__23143) : fexpr__23142.call(null,G__23143));
 });
 two048.core.reset = (function two048$core$reset(){
 return cljs.core.swap_BANG_.cljs$core$IFn$_invoke$arity$2(two048.core.board,two048.core.initial_board);
+});
+two048.core.move = (function two048$core$move(f,board){
+if(cljs.core.truth_(two048.core.is_winner_QMARK_(board))){
+confirm("\uD83C\uDF1FYou Won The Game!\u2728");
+
+two048.core.reset();
+} else {
+}
+
+cljs.core.swap_BANG_.cljs$core$IFn$_invoke$arity$2(board,f);
+
+return cljs.core.swap_BANG_.cljs$core$IFn$_invoke$arity$2(board,two048.core.get_new_board);
 });
 two048.core.colors = cljs.core.PersistentHashMap.fromArrays([(128),(4),(512),(32),(256),(1024),(64),(2),(16),(8)],["#ffdb58","#ffffe0","#ffc40c","#f0ead6","#e4d96f","#ffff00","#f0e68c","#fefefa","#f5f5dc","#fff8dc"]);
 two048.core.createDiv = (function two048$core$createDiv(element){
@@ -64,9 +76,9 @@ two048.core.render_row = (function two048$core$render_row(row){
 return new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$div,new cljs.core.PersistentArrayMap(null, 1, [cljs.core.cst$kw$class,"row"], null),cljs.core.map.cljs$core$IFn$_invoke$arity$2(two048.core.createDiv,row)], null);
 });
 two048.core.home_page = (function two048$core$home_page(){
-return new cljs.core.PersistentVector(null, 5, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$div,new cljs.core.PersistentArrayMap(null, 4, [cljs.core.cst$kw$class,"page",cljs.core.cst$kw$autoFocus,(1),cljs.core.cst$kw$tabIndex,(1),cljs.core.cst$kw$on_DASH_key_DASH_down,(function (p1__23142_SHARP_){
-var G__23143 = p1__23142_SHARP_.which;
-switch (G__23143) {
+return new cljs.core.PersistentVector(null, 5, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$div,new cljs.core.PersistentArrayMap(null, 4, [cljs.core.cst$kw$class,"page",cljs.core.cst$kw$autoFocus,true,cljs.core.cst$kw$tabIndex,(1),cljs.core.cst$kw$on_DASH_key_DASH_down,(function (p1__23144_SHARP_){
+var G__23145 = p1__23144_SHARP_.which;
+switch (G__23145) {
 case (37):
 return two048.core.move(two048.core.move_left,two048.core.board);
 
@@ -87,7 +99,7 @@ default:
 return null;
 
 }
-})], null),new cljs.core.PersistentVector(null, 4, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$div,new cljs.core.PersistentArrayMap(null, 1, [cljs.core.cst$kw$class,"header-and-reset"], null),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$h2,"two-048"], null),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$input,new cljs.core.PersistentArrayMap(null, 4, [cljs.core.cst$kw$type,cljs.core.cst$kw$button,cljs.core.cst$kw$class,"reset",cljs.core.cst$kw$value,"\u21BB",cljs.core.cst$kw$onClick,cljs.core.partial.cljs$core$IFn$_invoke$arity$1(two048.core.reset)], null)], null)], null),new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$div,new cljs.core.PersistentArrayMap(null, 1, [cljs.core.cst$kw$class,"board"], null),cljs.core.map.cljs$core$IFn$_invoke$arity$2(two048.core.render_row,cljs.core.deref(two048.core.board))], null),new cljs.core.PersistentVector(null, 4, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$div,new cljs.core.PersistentArrayMap(null, 1, [cljs.core.cst$kw$class,"controls"], null),new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$div,new cljs.core.PersistentArrayMap(null, 1, [cljs.core.cst$kw$class,"up"], null),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$input,new cljs.core.PersistentArrayMap(null, 3, [cljs.core.cst$kw$type,cljs.core.cst$kw$button,cljs.core.cst$kw$value,"\u2B06",cljs.core.cst$kw$onClick,cljs.core.partial.cljs$core$IFn$_invoke$arity$3(two048.core.move,two048.core.move_up,two048.core.board)], null)], null)], null),new cljs.core.PersistentVector(null, 5, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$div,new cljs.core.PersistentArrayMap(null, 1, [cljs.core.cst$kw$class,"down-controls"], null),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$input,new cljs.core.PersistentArrayMap(null, 3, [cljs.core.cst$kw$type,cljs.core.cst$kw$button,cljs.core.cst$kw$value,"\u2B05",cljs.core.cst$kw$onClick,cljs.core.partial.cljs$core$IFn$_invoke$arity$3(two048.core.move,two048.core.move_left,two048.core.board)], null)], null),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$input,new cljs.core.PersistentArrayMap(null, 3, [cljs.core.cst$kw$type,cljs.core.cst$kw$button,cljs.core.cst$kw$value,"\u2B07",cljs.core.cst$kw$onClick,cljs.core.partial.cljs$core$IFn$_invoke$arity$3(two048.core.move,two048.core.move_down,two048.core.board)], null)], null),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$input,new cljs.core.PersistentArrayMap(null, 3, [cljs.core.cst$kw$type,cljs.core.cst$kw$button,cljs.core.cst$kw$value,"\u27A1",cljs.core.cst$kw$onClick,cljs.core.partial.cljs$core$IFn$_invoke$arity$3(two048.core.move,two048.core.move_right,two048.core.board)], null)], null)], null)], null)], null);
+})], null),new cljs.core.PersistentVector(null, 4, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$div,new cljs.core.PersistentArrayMap(null, 1, [cljs.core.cst$kw$class,"header-and-reset"], null),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$h2,"two-048"], null),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$input,new cljs.core.PersistentArrayMap(null, 4, [cljs.core.cst$kw$type,cljs.core.cst$kw$button,cljs.core.cst$kw$class,"reset",cljs.core.cst$kw$value,"\u27F3",cljs.core.cst$kw$onClick,cljs.core.partial.cljs$core$IFn$_invoke$arity$1(two048.core.reset)], null)], null)], null),new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$div,new cljs.core.PersistentArrayMap(null, 1, [cljs.core.cst$kw$class,"board"], null),cljs.core.map.cljs$core$IFn$_invoke$arity$2(two048.core.render_row,cljs.core.deref(two048.core.board))], null),new cljs.core.PersistentVector(null, 4, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$div,new cljs.core.PersistentArrayMap(null, 1, [cljs.core.cst$kw$class,"controls"], null),new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$div,new cljs.core.PersistentArrayMap(null, 1, [cljs.core.cst$kw$class,"up"], null),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$input,new cljs.core.PersistentArrayMap(null, 3, [cljs.core.cst$kw$type,cljs.core.cst$kw$button,cljs.core.cst$kw$value,"\u21E7",cljs.core.cst$kw$onClick,cljs.core.partial.cljs$core$IFn$_invoke$arity$3(two048.core.move,two048.core.move_up,two048.core.board)], null)], null)], null),new cljs.core.PersistentVector(null, 5, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$div,new cljs.core.PersistentArrayMap(null, 1, [cljs.core.cst$kw$class,"down-controls"], null),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$input,new cljs.core.PersistentArrayMap(null, 3, [cljs.core.cst$kw$type,cljs.core.cst$kw$button,cljs.core.cst$kw$value,"\u21E6",cljs.core.cst$kw$onClick,cljs.core.partial.cljs$core$IFn$_invoke$arity$3(two048.core.move,two048.core.move_left,two048.core.board)], null)], null),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$input,new cljs.core.PersistentArrayMap(null, 3, [cljs.core.cst$kw$type,cljs.core.cst$kw$button,cljs.core.cst$kw$value,"\u21E9",cljs.core.cst$kw$onClick,cljs.core.partial.cljs$core$IFn$_invoke$arity$3(two048.core.move,two048.core.move_down,two048.core.board)], null)], null),new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [cljs.core.cst$kw$input,new cljs.core.PersistentArrayMap(null, 3, [cljs.core.cst$kw$type,cljs.core.cst$kw$button,cljs.core.cst$kw$value,"\u21E8",cljs.core.cst$kw$onClick,cljs.core.partial.cljs$core$IFn$_invoke$arity$3(two048.core.move,two048.core.move_right,two048.core.board)], null)], null)], null)], null)], null);
 });
 two048.core.mount_root = (function two048$core$mount_root(){
 return reagent.core.render.cljs$core$IFn$_invoke$arity$2(new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [two048.core.home_page], null),document.getElementById("app"));
