@@ -2,13 +2,22 @@
   (:require
    [reagent.core :as r]))
 
-(def initial-board
-  [[0 0 0 2]
-   [0 0 2 0]
-   [0 0 0 0]
-   [2 0 0 0]])
+(def empty-board [[0 0 0 0]
+                  [0 0 0 0]
+                  [0 0 0 0]
+                  [0 0 0 0]])
 
-(defonce board (r/atom initial-board))
+(defn find-index-to-replace [board]
+  (rand-nth (keep-indexed
+             #(if (zero? %2) %1) (flatten board))))
+
+(defn get-new-board [board]
+  (into [] (partition 4 (assoc (into [] (flatten board)) (find-index-to-replace board) 2))))
+
+(defn initial-board []
+  (get-new-board (get-new-board empty-board)))
+
+(defonce board (r/atom (initial-board)))
 
 (defn add-valid-adjacents [nums]
   (flatten
@@ -36,16 +45,12 @@
   (apply map vector
          (map process-left (apply map vector board))))
 
-(defn find-index-to-replace [board]
-  (rand-nth (keep-indexed
-             #(if (zero? %2) %1) (flatten board))))
-
-(defn get-new-board [board]
-  (into [] (partition 4 (assoc (into [] (flatten board)) (find-index-to-replace board) 2))))
-
 (defn move [f board]
   (do (swap! board f)
       (swap! board get-new-board)))
+
+(defn reset []
+  (swap! board initial-board))
 
 (def colors {2 "#fefefa"
              4 "#ffffe0"
@@ -73,8 +78,18 @@
                           38 (move move-up board)
                           39 (move move-right board)
                           40 (move move-down board) nil)}
-   [:h2 {:style {:width "400px"}} "two-048"]
-   [:div {:class "board"} (map render-row @board)]])
+   [:div {:class "header-and-reset"}
+    [:h2  "two-048"]
+    [:input {:type :button :class "reset" :value "↻" :onClick (partial reset)}]]
+   [:div {:class "board"} (map render-row @board)]
+
+   [:div {:class "controls"}
+    [:div {:class "up"}
+     [:input {:type :button :value "⬆" :onClick (partial move move-up board)}]]
+    [:div {:class "down-controls"}
+     [:input {:type :button :value "⬅" :onClick (partial move move-left board)}]
+     [:input {:type :button :value "⬇" :onClick (partial move move-down board)}]
+     [:input {:type :button :value "➡" :onClick (partial move move-right board)}]]]])
 
 (defn mount-root []
   (r/render [home-page] (.getElementById js/document "app")))

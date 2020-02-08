@@ -1,8 +1,7 @@
 body {
   font-family: "Helvetica Neue", Verdana, Helvetica, Arial, sans-serif;
-  max-width: 600px;
+  max-width: 400px;
   margin: 0 auto;
-  padding-top: 72px;
   -webkit-font-smoothing: antialiased;
   font-size: 1.125em;
   color: #333;
@@ -70,4 +69,50 @@ a:hover {
 .page {
   outline: none;
   text-align: center;
+}
+
+.controls {
+  width: 400px;
+  height: 400px;
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+}
+
+input[type="button"] {
+  height: 40px;
+  width: 70px;
+  border-radius: 10%;
+  border: 1px solid chocolate;
+  background-color: #ffea99;
+  font-size: 25px;
+  outline: none;
+
+  cursor: pointer;
+  border-radius: 15px;
+  box-shadow: 0 3px #999;
+}
+
+input[type="button"]:hover {
+  background-color: #ffdc66;
+}
+input[type="button"]:active {
+  background-color: #ffdc66;
+  box-shadow: 0 3px #666;
+  transform: translateY(2px);
+}
+
+.down-controls {
+  margin-top: 3px;
+}
+
+.down-controls input[type="button"] {
+  margin: 3px;
+}
+
+.header-and-reset {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
 }
